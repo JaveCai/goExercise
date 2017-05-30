@@ -1,7 +1,6 @@
-// Copyright © 2017
-// Jave
-// Date 20170520
-
+// Copyright © 2017 Jave.CAI
+// See page 122.
+// Date 2017.05.22
 //!+main
 
 // Findlinks1 prints the links in an HTML document read from standard input.
@@ -20,10 +19,8 @@ func main() {
 		fmt.Fprintf(os.Stderr, "findlinks1: %v\n", err)
 		os.Exit(1)
 	}
-	c := make(map[string]int)
-	_, count := visit(nil, c, doc)
-	for k, v := range count {
-		fmt.Printf("%s:\t%d\n", k, v)
+	for _, link := range visit(nil, doc) {
+		fmt.Println(link)
 	}
 }
 
@@ -31,27 +28,51 @@ func main() {
 
 //!+visit
 // visit appends to links each link found in n and returns the result.
-func visit(links []string, count map[string]int, n *html.Node) ([]string, map[string]int) {
+func visit(links []string, n *html.Node) []string {
+
 	if n.Type == html.ElementNode && n.Data == "a" {
 		for _, a := range n.Attr {
 			if a.Key == "href" {
 				links = append(links, a.Val)
+
 			}
-		}
-	}
-	if n.Type == html.ElementNode {
-		//fmt.Println(n.Data)
-		switch n.Data {
-		case "div", "span", "p":
-			count[n.Data]++
 		}
 
 	}
-	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		links, count = visit(links, count, c)
+	//for c := n.FirstChild; c != nil; c = c.NextSibling {
+	if n.FirstChild != nil {
+		links = visit(links, n.FirstChild)
+
 	}
-	return links, count
+
+	if n.NextSibling != nil {
+		links = visit(links, n.NextSibling)
+
+	}
+	return links
+
 }
+
+/*
+func VisitChild(links []string, n *html.Node) []string {
+	if n.Type == html.ElementNode && n.Data == "a" {
+		for _, a := range n.Attr {
+			if a.Key == "href" {
+				links = append(links, a.Val)
+
+			}
+		}
+
+	}
+
+	if n != nil && n.NextSibling != nil {
+		fmt.Println("333")
+		links = VisitChild(links, n.NextSibling)
+	}
+
+	return links
+
+}*/
 
 //!-visit
 

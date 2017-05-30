@@ -1,9 +1,11 @@
-// Copyright © 2016 Alan A. A. Donovan & Brian W. Kernighan.
-// License: https://creativecommons.org/licenses/by-nc-sa/4.0/
+// Copyright © 2017 Jave.CAI
 
 // See page 96.
 
-// Dedup prints only one instance of each line; duplicates are removed.
+/* Exercis e 4.9: Write a program wordfreq to report the frequency of each word
+in an input text ﬁle.Call input.Split(bufio.ScanWords) before the ﬁrst call to
+Scan to break the input into words instead of lines.*/
+
 package main
 
 import (
