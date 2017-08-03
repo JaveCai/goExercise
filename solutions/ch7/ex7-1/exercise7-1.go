@@ -2,6 +2,11 @@
 // Finish date 20170509
 
 // See page 173. exercise 7.1
+
+/*
+Exercise 7.1: Using the ideas from ByteCounter,implement counters for words and for lines.
+You will ﬁnd bufio.ScanWords useful.
+*/
 package main
 
 import (
