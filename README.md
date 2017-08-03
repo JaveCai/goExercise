@@ -1,21 +1,22 @@
-# The source code of the Go Programming Language & its exercise
+# The source code gopl & its solutions
 
 This repository provides the downloadable example programs
 for the book, "The Go Programming Language"; see http://www.gopl.io.
 
-These example programs are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br/>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+and also the soulutions for its exercises.
 
-You can download, build, and run the programs with the following commands:
+MIT License
 
-	$ export GOPATH=$HOME/gobook            # choose workspace directory
-	$ go get gopl.io/ch1/helloworld         # fetch, build, install
-	$ $GOPATH/bin/helloworld                # run
-	Hello, 世界
+Copyright (c) 2017-2018 Jave CAI (kasonpt@163.com)
 
-Many of the programs contain comments of the form `//!+` and `//!-`.
-These comments bracket the parts of the programs that are excerpted in the
-book; you can safely ignore them.  In a few cases, programs
-have been reformatted in an unnatural way so that they can be presented
-in stages in the book.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+MIT License
+
+Copyright (c) 2015-2016 Vince Yuan (vince.yuan###gmail.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
