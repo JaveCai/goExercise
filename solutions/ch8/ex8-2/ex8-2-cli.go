@@ -1,3 +1,7 @@
+/*
+go ftp client for ex8.2
+*/
+
 package main
 
 import (
@@ -10,7 +14,7 @@ import (
 	"strings"
 )
 
-/*define a private protocol to send EOL to the client*/
+/*define a private protocol to send EOL*/
 var EOL string = "JPROTOCOL:EOL"
 
 func main() {
