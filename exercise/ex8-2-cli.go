@@ -4,9 +4,13 @@ import (
 	"bufio"
 	"fmt"
 	"net"
+	_"io"
 	"os"
 	"strings"
 )
+
+/*define a private protocol to send EOF to the client*/
+var EOF string = "JPROTOCOL:EOF"
 
 func main() {
 
@@ -14,22 +18,38 @@ func main() {
 	if err != nil {
 		fmt.Println("Dial err") // handle error
 	}
-	//fmt.Fprintf(conn, "GET / HTTP/1.0\r\n\r")
 	in := bufio.NewScanner(os.Stdin)
 	for in.Scan() {
 		fmt.Fprintf(conn, in.Text())
-		fmt.Fprintf(conn, "\r\n\r") //send msg
+		fmt.Fprintf(conn, "\r\n") //send msg
 		strs := strings.Split(in.Text(), " ")
-		if len(strs) == 1 && strings.Contains(strs[0], "close") {
+		if  len(strs) == 1 && strs[0]=="close" {
 			return
 		}
 		switch strs[0] {
 		case "ls":
 			resp := bufio.NewScanner(conn)
 			for resp.Scan() {
-				fmt.Println(resp.Text())
+				if strings.Contains(resp.Text(), EOF){
+					//fmt.Println("EOF")
+					break
+				}else{
+					fmt.Println(resp.Text())
+				}
+				
 			}
+		
+		case "cd":
+			//io.Copy(os.Stdout,conn)
+			resp := bufio.NewScanner(conn)
+			for resp.Scan() {
+				fmt.Println(resp.Text())
+				break
+			}
+	
+		case "get":
 		}
+			
 	}
 
 }
