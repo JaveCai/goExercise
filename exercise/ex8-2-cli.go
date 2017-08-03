@@ -3,14 +3,15 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"net"
 	"io"
+	"net"
 	"os"
+	"strconv"
 	"strings"
 )
 
-/*define a private protocol to send EOF to the client*/
-var EOF string = "JPROTOCOL:EOF"
+/*define a private protocol to send EOL to the client*/
+var EOL string = "JPROTOCOL:EOL"
 
 func main() {
 
@@ -23,41 +24,47 @@ func main() {
 		fmt.Fprintf(conn, in.Text())
 		fmt.Fprintf(conn, "\r\n") //send msg
 		strs := strings.Split(in.Text(), " ")
-		if  len(strs) == 1 && strs[0]=="close" {
+		if len(strs) == 1 && strs[0] == "close" {
 			return
 		}
 		switch strs[0] {
 		case "ls":
 			resp := bufio.NewScanner(conn)
 			for resp.Scan() {
-				if strings.Contains(resp.Text(), EOF){
-					//fmt.Println("EOF")
+				if strings.Contains(resp.Text(), EOL) {
 					break
-				}else{
+				} else {
 					fmt.Println(resp.Text())
 				}
-				
+
 			}
-		
+
 		case "cd":
-			//io.Copy(os.Stdout,conn)
 			resp := bufio.NewScanner(conn)
-			for resp.Scan() {
-				fmt.Println(resp.Text())
-				break
-			}
-	
+			resp.Scan()
+			fmt.Printf(resp.Text())
+
 		case "get":
-			file, err:= os.Create(strs[1])
+			var size int
+			resp := bufio.NewScanner(conn)
+			resp.Scan()
+			size, _ = strconv.Atoi(resp.Text())
+			//fmt.Printf("file size: %d\n", size)
+
+			file, err := os.Create(strs[1])
 			if err != nil {
-				fmt.Println("err: Open fail")
+				fmt.Println("err: Create file fail")
 				return
 			}
-			io.Copy(file, conn)
+			io.CopyN(file, conn, int64(size))
 			file.Close()
-			
+			fmt.Printf("Done!\n")
+
+			resp.Scan()
+			fmt.Printf(resp.Text())
+
 		}
-			
+
 	}
 
 }
