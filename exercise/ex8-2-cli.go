@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"net"
-	_"io"
+	"io"
 	"os"
 	"strings"
 )
@@ -48,6 +48,14 @@ func main() {
 			}
 	
 		case "get":
+			file, err:= os.Create(strs[1])
+			if err != nil {
+				fmt.Println("err: Open fail")
+				return
+			}
+			io.Copy(file, conn)
+			file.Close()
+			
 		}
 			
 	}

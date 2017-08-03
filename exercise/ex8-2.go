@@ -10,6 +10,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net"
 	"os"
@@ -122,10 +123,19 @@ func handleConnection(conn net.Conn) {
 			fmt.Fprintf(conn, "\r\n") 
 		case "get":
 			fmt.Println("You arequest for get")
+			file, err := os.Open(strs[1]) // For read access.
+			if err != nil {
+				fmt.Println("err: Open fail")
+				return
+			}
+			io.Copy(conn,file)
+			file.Close()
+			fmt.Println("Download done.")
 
 		default:
 			fmt.Println("default")
 		}
+
 	}
 
 }
