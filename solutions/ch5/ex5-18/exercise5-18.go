@@ -1,5 +1,5 @@
 /*
-Exercise 5.18:Without changing its behavior,rewrite the fetch function to use defer to clos e
+Exercise 5.18:Without changing its behavior,rewrite the fetch function to use defer to close
 the writable ﬁle.
 
 date: 17.06.07

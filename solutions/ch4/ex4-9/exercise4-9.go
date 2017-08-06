@@ -1,4 +1,3 @@
-// Copyright © 2017 Jave.CAI
 
 // See page 96.
 

@@ -1,17 +1,10 @@
-// Copyright © 2016 Alan A. A. Donovan & Brian W. Kernighan.
-// License: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-// See page 165.
-
-// Package intset provides a set of integers based on a bit vector.
-//package intset
 
 package main
 
 import (
 	"bytes"
 	"fmt"
-	""
 )
 
 //func Example_one() {
