@@ -23,6 +23,10 @@ func main() {
 	if err != nil {
 		fmt.Println("Dial err") // handle error
 	}
+	resp := bufio.NewScanner(conn)
+	resp.Scan()
+	fmt.Printf(resp.Text())
+
 	in := bufio.NewScanner(os.Stdin)
 	for in.Scan() {
 		fmt.Fprintf(conn, in.Text())

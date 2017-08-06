@@ -21,6 +21,7 @@ import (
 
 /*define a private protocol to send end of list(EOL) to the client*/
 var EOL string = "JPROTOCOL:EOL"
+var SUFFIX string = "@JFTP> \r\n"
 var slash string
 
 func main() {
@@ -48,6 +49,7 @@ func handleConnection(conn net.Conn) {
 	defer conn.Close()
 	CurPath, _ := filepath.Abs(filepath.Dir(os.Args[0]))
 	PrevPath := CurPath
+	fmt.Fprintf(conn, CurPath+SUFFIX)
 	//fmt.Fprintf(conn, "SERVER Serving on %s \r\n", runtime.GOOS)
 	in := bufio.NewScanner(conn)
 	for in.Scan() {
@@ -118,7 +120,7 @@ func handleConnection(conn net.Conn) {
 				}
 
 			}
-			fmt.Fprintf(conn, CurPath+"$ "+"\r\n")
+			fmt.Fprintf(conn, CurPath+SUFFIX)
 
 		case "get":
 			file, err := os.Open(strs[1]) // For read access.
@@ -134,7 +136,7 @@ func handleConnection(conn net.Conn) {
 			fmt.Fprintf(conn, "%d\r\n", fileInfo.Size())
 			io.CopyN(conn, file, fileInfo.Size())
 			file.Close()
-			fmt.Fprintf(conn, CurPath+"$ "+"\r\n")
+			fmt.Fprintf(conn, CurPath+SUFFIX)
 
 		default:
 			fmt.Println("default")
