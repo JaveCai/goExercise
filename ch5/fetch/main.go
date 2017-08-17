@@ -49,6 +49,8 @@ func main() {
 			fmt.Fprintf(os.Stderr, "fetch %s: %v\n", url, err)
 			continue
 		}
-		fmt.Fprintf(os.Stderr, "%s => %s (%d bytes).\n", url, local, n)
+		//fmt.Fprintf(os.Stderr, "%s => %s (%d bytes).\n", url, local, n)
+		fmt.Printf("%s => %s (%d bytes).\n", url, local, n)
+
 	}
 }
