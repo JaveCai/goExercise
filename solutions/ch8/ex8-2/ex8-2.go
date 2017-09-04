@@ -19,7 +19,7 @@ import (
 	"strings"
 )
 
-/*define a private protocol to send end of list(EOL) to the client*/
+/*define a private protocol to send end of file list(EOL) to the client*/
 var EOL string = "JPROTOCOL:EOL"
 var SUFFIX string = "@JFTP> \r\n"
 var slash string
@@ -131,6 +131,7 @@ func handleConnection(conn net.Conn) {
 			fileInfo, err := file.Stat()
 			if err != nil {
 				fmt.Println("err: File.Stat() fail")
+				file.Close()
 				continue
 			}
 			fmt.Fprintf(conn, "%d\r\n", fileInfo.Size())

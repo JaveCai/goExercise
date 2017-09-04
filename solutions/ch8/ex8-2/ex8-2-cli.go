@@ -14,7 +14,7 @@ import (
 	"strings"
 )
 
-/*define a private protocol to send EOL*/
+/*define a private protocol to send the end of file list*/
 var EOL string = "JPROTOCOL:EOL"
 
 func main() {
